@@ -1,0 +1,299 @@
+{
+    "info": {
+      "name": "DocGiri API",
+      "description": "Postman collection for DocGiri API, including Google login.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Users",
+        "item": [
+          {
+            "name": "Get All Users",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/users",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "users"]
+              }
+            }
+          },
+          {
+            "name": "Get User By ID",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/users/:id",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "users", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Create User",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/users",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "users"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "googleId": "your-google-id",
+                  "name": "John Doe",
+                  "email": "john.doe@example.com",
+                  "profilePicture": "url-to-picture",
+                  "dateOfBirth": "1990-01-01",
+                  "gender": "Male"
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sessions",
+        "item": [
+          {
+            "name": "Login",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/sessions/login",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "sessions", "login"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "googleId": "your-google-id"
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          },
+          {
+            "name": "Logout",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/sessions/logout",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "sessions", "logout"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "sessionId": "your-session-id"
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Admins",
+        "item": [
+          {
+            "name": "Get All Admins",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/admins",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "admins"]
+              }
+            }
+          },
+          {
+            "name": "Create Admin",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/admins",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "admins"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "name": "Admin Name",
+                  "email": "admin@example.com",
+                  "role": "Admin",
+                  "permissions": ["manage_users", "manage_content"]
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Symptoms",
+        "item": [
+          {
+            "name": "Get All Symptoms",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/symptoms",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "symptoms"]
+              }
+            }
+          },
+          {
+            "name": "Create Symptom",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/symptoms",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "symptoms"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "name": "Headache",
+                  "description": "A continuous pain in the head.",
+                  "commonCauses": ["Stress", "Dehydration"],
+                  "possibleTreatments": ["treatment-id-1", "treatment-id-2"]
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Treatments",
+        "item": [
+          {
+            "name": "Get All Treatments",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/treatments",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "treatments"]
+              }
+            }
+          },
+          {
+            "name": "Create Treatment",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/treatments",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "treatments"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "name": "Paracetamol",
+                  "description": "A pain reliever and a fever reducer.",
+                  "steps": ["Take one tablet every 6 hours"],
+                  "medications": ["Paracetamol"],
+                  "precautions": ["Do not exceed recommended dosage"],
+                  "associatedSymptoms": ["symptom-id-1", "symptom-id-2"]
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Blogs",
+        "item": [
+          {
+            "name": "Get All Blogs",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/blogs",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "blogs"]
+              }
+            }
+          },
+          {
+            "name": "Create Blog",
+            "request": {
+              "method": "POST",
+              "url": {
+                "raw": "https://doc.puspenduofficial.com/api/v1/blogs",
+                "protocol": "https",
+                "host": ["doc", "puspenduofficial", "com"],
+                "path": ["api", "v1", "blogs"]
+              },
+              "body": {
+                "mode": "raw",
+                "raw": JSON.stringify({
+                  "authorId": "author-id-1",
+                  "title": "Understanding Headaches",
+                  "content": "Headaches are a common ailment...",
+                  "tags": ["health", "headache"]
+                })
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

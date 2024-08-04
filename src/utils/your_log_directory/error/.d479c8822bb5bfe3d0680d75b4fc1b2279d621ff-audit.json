@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/puspendudas/EasyBillingBack/src/utils/your_log_directory/error/.d479c8822bb5bfe3d0680d75b4fc1b2279d621ff-audit.json",
+    "files": [
+        {
+            "date": 1708196630395,
+            "name": "/Users/puspendudas/EasyBillingBack/src/utils/your_log_directory/error/2024-02-18.log",
+            "hash": "f025505bb5df46dc3190e1ddebe5a5284857599f92bed3a44b9a35aea7955c69"
+        }
+    ],
+    "hashType": "sha256"
+}
