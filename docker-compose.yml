@@ -7,20 +7,23 @@ services:
       context: ./
       target: development-build-stage
       dockerfile: Dockerfile
-    container_name: server
+    container_name: docgiri
+    environment:
+      - TZ=Asia/Kolkata
     ports:
       - '2552:2552'
     volumes:
       - ./:/app
       - /app/node_modules
     restart: 'unless-stopped'
-    # networks:
-    #   - backend
-    
-    
-# networks:
-#   backend:
-#     driver: bridge
+    networks:
+      myipvlan:
+        ipv4_address: 192.168.0.9
+
+networks:
+  myipvlan:
+    external: true
+    name: br0
 
 volumes:
   data:
