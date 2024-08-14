@@ -15,4 +15,12 @@ export class CreateSymptomDto {
   @IsArray()
   @IsOptional()
   public possibleTreatments?: string[];
+
+  @IsArray()
+  @IsOptional()
+  public children?: string[];
+
+  @IsString()
+  @IsOptional()
+  public parent?: string;
 }
