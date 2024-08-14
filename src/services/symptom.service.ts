@@ -1,9 +1,7 @@
-// symptom.service.ts
-
 import { CreateSymptomDto } from '@dtos/symptoms.dto';
 import { HttpException } from '@exceptions/HttpException';
 import SymptomModel from '@models/symptom.model';
-import { Symptom } from '@interfaces/symptoms.interface';
+import { Symptom, SymptomDocument } from '@interfaces/symptoms.interface';
 import { isEmpty } from '@utils/util';
 
 class SymptomService {
@@ -50,7 +48,17 @@ class SymptomService {
   public async createSymptom(symptomData: CreateSymptomDto): Promise<Symptom> {
     if (isEmpty(symptomData)) throw new HttpException(400, 'symptomData is empty');
 
-    const createSymptomData: Symptom = await this.symptoms.create(symptomData);
+    // Create the new symptom
+    const createSymptomData: SymptomDocument = await this.symptoms.create(symptomData);
+
+    // If the symptom has a parent, update the parent's children array
+  if (createSymptomData.parent) {
+    await this.symptoms.findByIdAndUpdate(
+      createSymptomData.parent,
+      { $push: { children: createSymptomData._id } }
+    );
+  }
+
     return createSymptomData;
   }
 
