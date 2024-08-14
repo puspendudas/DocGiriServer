@@ -10,7 +10,7 @@ class SymptomService {
   public symptoms = SymptomModel;
 
   public async findAllSymptoms(): Promise<Symptom[]> {
-    const allSymptoms: Symptom[] = await this.symptoms.find();
+    const allSymptoms: Symptom[] = await this.symptoms.find({ parent: null });
     return allSymptoms;
   }
 
