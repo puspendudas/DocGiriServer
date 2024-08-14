@@ -14,7 +14,7 @@ export class CreateUserDto {
   @IsOptional()
   public profilePicture?: string;
 
-  @IsDate()
+  @IsString()
   @IsOptional()
   public dateOfBirth?: string;
 
