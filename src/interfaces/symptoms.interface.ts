@@ -6,6 +6,8 @@ interface Symptom {
   description?: string;
   commonCauses?: string[];
   possibleTreatments?: any[];
+  children?: Symptom[];  // Children symptoms
+  parent?: Symptom | null;  // Parent symptom
 }
 
 interface SymptomDocument extends Symptom, Document {

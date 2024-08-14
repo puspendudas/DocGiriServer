@@ -1,3 +1,5 @@
+// symptoms.routes.ts
+
 import { Router } from 'express';
 import SymptomsController from '@controllers/symptom/index';
 import { CreateSymptomDto } from '@dtos/symptoms.dto';
@@ -18,9 +20,10 @@ class SymptomsRoute implements Routes {
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.symptomsController.getSymptoms);
     this.router.get(`${this.path}/:id`, this.symptomsController.getSymptomById);
-    this.router.post(`${this.path}`,  validationMiddleware(CreateSymptomDto, 'body'), this.symptomsController.createSymptom);
-    this.router.put(`${this.path}/:id`,  validationMiddleware(CreateSymptomDto, 'body', true), this.symptomsController.updateSymptom);
-    this.router.delete(`${this.path}/:id`,  this.symptomsController.deleteSymptom);
+    this.router.get(`${this.path}/:id/next`, this.symptomsController.getChildrenOrTreatment);
+    this.router.post(`${this.path}`, validationMiddleware(CreateSymptomDto, 'body'), this.symptomsController.createSymptom);
+    this.router.put(`${this.path}/:id`, validationMiddleware(CreateSymptomDto, 'body', true), this.symptomsController.updateSymptom);
+    this.router.delete(`${this.path}/:id`, this.symptomsController.deleteSymptom);
   }
 }
 

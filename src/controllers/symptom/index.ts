@@ -1,3 +1,5 @@
+// symptoms.controller.ts
+
 import { NextFunction, Request, Response } from 'express';
 import { CreateSymptomDto } from '@dtos/symptoms.dto';
 import { Symptom } from '@interfaces/symptoms.interface';
@@ -24,6 +26,24 @@ class SymptomsController {
       const symptomId = String(req.params.id);
       const findOneSymptomData: Symptom = await this.symptomService.findSymptomById(symptomId);
       res.status(200).json({ data: findOneSymptomData, message: 'success' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getChildrenOrTreatment = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const symptomId = String(req.params.id);
+      const children = await this.symptomService.findChildrenSymptoms(symptomId);
+
+      if (children && children.length > 0) {
+        // Return the child symptoms
+        res.status(200).json({ data: children, message: 'success' });
+      } else {
+        // No children, return the treatment
+        const treatmentSymptom = await this.symptomService.getSymptomTreatment(symptomId);
+        res.status(200).json({ data: treatmentSymptom, message: 'treatment provided' });
+      }
     } catch (error) {
       next(error);
     }

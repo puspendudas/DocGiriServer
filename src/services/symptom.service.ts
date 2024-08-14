@@ -1,3 +1,5 @@
+// symptom.service.ts
+
 import { CreateSymptomDto } from '@dtos/symptoms.dto';
 import { HttpException } from '@exceptions/HttpException';
 import SymptomModel from '@models/symptom.model';
@@ -15,10 +17,34 @@ class SymptomService {
   public async findSymptomById(symptomId: string): Promise<Symptom> {
     if (isEmpty(symptomId)) throw new HttpException(400, 'SymptomId is empty');
 
-    const findSymptom: Symptom = await this.symptoms.findById(symptomId);
+    const findSymptom: Symptom = await this.symptoms.findById(symptomId).populate('children');
     if (!findSymptom) throw new HttpException(409, "Symptom doesn't exist");
 
     return findSymptom;
+  }
+
+  public async findChildrenSymptoms(symptomId: string): Promise<Symptom[]> {
+    if (isEmpty(symptomId)) throw new HttpException(400, 'SymptomId is empty');
+
+    const symptom = await this.symptoms.findById(symptomId).populate('children');
+    if (!symptom) throw new HttpException(409, "Symptom doesn't exist");
+
+    return symptom.children;
+  }
+
+  public async getSymptomTreatment(symptomId: string): Promise<Symptom | null> {
+    if (isEmpty(symptomId)) throw new HttpException(400, 'SymptomId is empty');
+
+    const symptom = await this.symptoms.findById(symptomId).populate('possibleTreatments');
+    if (!symptom) throw new HttpException(409, "Symptom doesn't exist");
+
+    // If the symptom has children, return the children
+    if (symptom.children && symptom.children.length > 0) {
+      return null;
+    }
+
+    // If no children, return the treatment
+    return symptom;
   }
 
   public async createSymptom(symptomData: CreateSymptomDto): Promise<Symptom> {
