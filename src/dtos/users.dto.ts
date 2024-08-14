@@ -16,7 +16,7 @@ export class CreateUserDto {
 
   @IsDate()
   @IsOptional()
-  public dateOfBirth?: Date;
+  public dateOfBirth?: string;
 
   @IsEnum(['Male', 'Female', 'Other'])
   @IsOptional()
