@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, ObjectId } from 'mongoose';
 
 interface Treatment {
   id?: any;
@@ -11,7 +11,7 @@ interface Treatment {
 }
 
 interface TreatmentDocument extends Treatment, Document {
-  id: string;
+  _id: ObjectId;  // MongoDB ObjectId
 }
 
 export { Treatment, TreatmentDocument };

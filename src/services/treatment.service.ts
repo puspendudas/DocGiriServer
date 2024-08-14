@@ -1,11 +1,14 @@
 import { CreateTreatmentDto } from '@dtos/treatments.dto';
 import { HttpException } from '@exceptions/HttpException';
 import TreatmentModel from '@models/treatment.model';
-import { Treatment } from '@interfaces/treatment.model';
+import SymptomModel from '@models/symptom.model'; // Import Symptom model
+import { Treatment, TreatmentDocument } from '@interfaces/treatment.model';
+import { Symptom } from '@interfaces/symptoms.interface';
 import { isEmpty } from '@utils/util';
 
 class TreatmentService {
   public treatments = TreatmentModel;
+  public symptoms = SymptomModel;
 
   public async findAllTreatments(): Promise<Treatment[]> {
     const allTreatments: Treatment[] = await this.treatments.find();
@@ -24,7 +27,17 @@ class TreatmentService {
   public async createTreatment(treatmentData: CreateTreatmentDto): Promise<Treatment> {
     if (isEmpty(treatmentData)) throw new HttpException(400, 'treatmentData is empty');
 
-    const createTreatmentData: Treatment = await this.treatments.create(treatmentData);
+    // Create the new treatment
+    const createTreatmentData: TreatmentDocument = await this.treatments.create(treatmentData);
+
+    // Update the associated symptoms with this treatment's ID
+    if (treatmentData.associatedSymptoms && treatmentData.associatedSymptoms.length > 0) {
+      await this.symptoms.updateMany(
+        { _id: { $in: treatmentData.associatedSymptoms } },
+        { $push: { possibleTreatments: createTreatmentData._id } }
+      );
+    }
+
     return createTreatmentData;
   }
 
