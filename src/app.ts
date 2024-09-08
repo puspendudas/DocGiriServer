@@ -4,7 +4,7 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { NODE_ENV, PORT, LOG_FORMAT, CREDENTIALS, ORIGIN_LIVE, ORIGIN_SATTA, ORIGIN_LOCAL, ORIGIN_LOCAL_1, ORIGIN_LOCAL_2, ORIGIN_SATTA_1, ORIGIN_LIVE_1 } from '@config';
 import DB from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -45,7 +45,7 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(cors({ origin: [ORIGIN_LOCAL, ORIGIN_LIVE, ORIGIN_SATTA,  ORIGIN_LOCAL_1, ORIGIN_LOCAL_2, ORIGIN_SATTA_1, ORIGIN_LIVE_1], optionsSuccessStatus: 200, credentials: CREDENTIALS }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(express.json());
